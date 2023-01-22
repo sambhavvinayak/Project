@@ -1,3 +1,5 @@
+
+
 /*
 * making this for signUp page in java
 */
@@ -14,39 +16,54 @@ import javax.swing.*; // this is for JFrame help to extends
 
 public class Signup extends JFrame{
 
+    // public JPanel panel;
     public JTextField usernameField;
     public JPasswordField passwordField;
     public JButton ButtonS,ButtonL;
-    public JLabel heading,username,password , lastM;
+    public JLabel heading,username,password;
     public String user,pass;
 
 
     public  Signup(){
+        //panel
+        // panel = new JPanel();
+        // add(panel);
+        // panel.setBounds(0,0,300,200);
+        // panel.setBackground(Color.CYAN);
 
-        super("SignUp Page"); // title 
-        setLayout(new FlowLayout());  // it is compulsory becouse it set and align the all things
-
-
+        setTitle("SignUp Page"); // title 
+        Container c = getContentPane();
+        c.setLayout(null);
+          // it is compulsory becouse it set and align the all things
+        
         usernameField = new JTextField(20);
         passwordField = new JPasswordField(20);
         ButtonS = new JButton("SignUp");
         ButtonL = new JButton("Login");
         username = new JLabel("UserName : ");
         password = new JLabel("Password : ");
-        heading = new JLabel("Welcome in signing page .\nThat you cover it here only");
+        heading = new JLabel("Welcome in signing page");
                 
-        add(heading);
-        add(username);
-        add(usernameField);
-        add(password);
-        add(passwordField);
-        add(ButtonS);add(ButtonL);
+        c.add(heading);
+        heading.setBounds(150,10,200, 20);
+        c.add(username);
+        username.setBounds(10,40,200, 20);
+        c.add(usernameField);
+        usernameField.setBounds(120,40,200, 20);
+        c.add(password);
+        password.setBounds(10,80,200, 20);
+        c.add(passwordField);
+        passwordField.setBounds(120,80,200, 20);
+        c.add(ButtonS);
+        ButtonS.setBounds(85,150,100, 30);
+        add(ButtonL);
+        ButtonL.setBounds(200,150,100, 30);
         
         ButtonL.addActionListener(new ActionListener(){
             
             public void actionPerformed(ActionEvent e){
                 LoginPage login = new LoginPage();
-                // setVisible(false);
+                login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 dispose();
                 login.setVisible(true);
             }
@@ -108,20 +125,19 @@ public class Signup extends JFrame{
                 if (/*user.equals("") && pass.equals("")*/isEmpty()) {
                     return;
                 }else{
+                    System.out.println("Email : "+usernameField.getText());
+                    System.out.println("Password : "+new String(passwordField.getPassword()));
                     usernameField.setText("");
                     passwordField.setText("");
                     JOptionPane.showMessageDialog(null,"You SignUp Succesfully");
                     System.out.println("you succesfully uploaded your email and password");
-                    System.out.println("Email : "+usernameField.getText());
-                    System.out.println("Password : "+new String(passwordField.getPassword()));
 
-                    lastM = new JLabel("Proceed for login");
-                    add(lastM);
+                
                 }
             }
         });
-        
-        setSize(400,500);
+        setLocation(200,100);
+        setSize(450,500);
         setVisible(true);
     }
     public static void main(String[] args) {
