@@ -118,6 +118,8 @@ public class Signup extends JFrame{
                 }catch(IOException q){
                     q.printStackTrace();
                 }
+                
+                
                 ////////////////////////////
                ///writer for password..
 
@@ -144,6 +146,4 @@ public class Signup extends JFrame{
         Signup signUp = new Signup();                                             
         signUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
 }
-
