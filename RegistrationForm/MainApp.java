@@ -14,7 +14,11 @@ public class MainApp extends JFrame implements ActionListener{
     String Date[] = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"};
     String Month[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
     String Years[] = {"1990","1991","1992","1993","1994","1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006"};
-    JComboBox CBDate,CBMonth,CBYear;
+    static JComboBox CBDate;
+
+    static JComboBox CBMonth;
+
+    JComboBox CBYear;
     JTextArea TAAddress;
     JCheckBox CAgree;
     JButton BSubmit; 
@@ -110,17 +114,20 @@ public class MainApp extends JFrame implements ActionListener{
         CAgree.setForeground(Color.BLUE);
         c.add(CAgree);
 
+
         BSubmit = new JButton("Submit");
         BSubmit.setFont(font);
         BSubmit.setBounds(70,410,100,30);
         c.add(BSubmit);
         BSubmit.addActionListener(this);
 
+
         Result = new JLabel("");
         Result.setFont(font);
-        Result.setBounds(40,500,250,30);
+        Result.setBounds(40,500,350,30);
         c.add(Result);
 
+        CBMonth.addActionListener(new month());
 
 
 
@@ -130,27 +137,64 @@ public class MainApp extends JFrame implements ActionListener{
 
 
     public void actionPerformed(ActionEvent e) {
+
+        // if (CBMonth.getSelectedIndex() ==1) {
+        //     CBDate.removeItem(31);
+        // }
         
         if (FName.getText().equals("") || FMobile.getText().equals(""))
         {
+
             LName.setText("Name*:");
             LMobile.setText("Mobile*: ");
             Result.setText("Please Enter full details");
-        }
+            
+        }       
         else
         {
-
-            Result.setText("You successFully Registered.");
-            LName.setText("Name :");
-            LMobile.setText("Mobile : ");
+            if ( CAgree.isSelected()  ) {
+                Result.setText("You successFully Registered.");
+                LName.setText("Name :");
+                LMobile.setText("Mobile : ");
+                return;
+            }
+            
+            Result.setText("Please Select the term and conditions.");
         }
+        
     }
-
+    
     public static void main(String[] args) {
         MainApp app = new MainApp();
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+
+    
+}
+/**
+ * month
+ */
+ class month implements ActionListener{
+
+    public void actionPerformed(ActionEvent e) {
+
+        
+        if (MainApp.CBDate.getItemCount() == 31) {
+            
+            System.out.println(MainApp.CBDate.getItemCount());
+            MainApp.CBDate.removeItem("31");
+        }
+        if (MainApp.CBMonth.getSelectedIndex() == 0 || MainApp.CBMonth.getSelectedIndex() == 2
+        || MainApp.CBMonth.getSelectedIndex() == 4 || MainApp.CBMonth.getSelectedIndex() == 6
+        || MainApp.CBMonth.getSelectedIndex() == 7  || MainApp.CBMonth.getSelectedIndex() == 9 
+        || MainApp.CBMonth.getSelectedIndex() == 11  
+        ) {
+           MainApp.CBDate.addItem("31");
+        }
+        
+        
+    }
 
     
 }
